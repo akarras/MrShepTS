@@ -1,0 +1,13 @@
+{
+	"extends": [
+		"tslint:recommended",
+		"tslint-eslint-rules"
+	],
+	"rules": {
+		"indent": [true, "spaces", 2],
+		"semicolon": [false, "never"],
+		"ordered-imports": false,
+		"align": false,
+		"quotemark": [false, "single", "avoid-escape", "avoid-template"]
+	}
+}

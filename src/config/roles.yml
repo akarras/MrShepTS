@@ -1,0 +1,13 @@
+# Map of message IDs and their corresponding roles
+roles:
+  - name: 'Patch notes'
+    messageId: '557380604291842049'
+    roleId: '611974746497875999'
+    emoji: '📝'
+    color: 0xb00b30
+  - name: 'Play Sessions'
+    messageId: '557380605021782016'
+    roleId: '611975188686307338'
+    emoji: '🎮'
+    color: 0xdead00
+    

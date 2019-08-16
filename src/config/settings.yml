@@ -1,0 +1,24 @@
+settings:
+  token: 'NTU3MjAwOTE1MzA0ODA4NDU5.D3E96w.wZus9HFlknZQ64sNriXpOtrZULo'
+  prefix: '!test'
+  nameBot: 'Mr Sheep'
+  activitySwapTimeMs: 360000
+  activities: 
+    - 'Being in beta is hard'
+    - 'Play Stir Party!'
+    - 'Have a good day!'
+    - 'stirparty.com'
+    - 'Tell your friends!'
+    - 'Bring your friends!'
+    - 'I love you!'
+    - 'Just be you!'
+    - 'Be good!'
+    - "Wanna snuggle?"
+    - "Steam 2020"
+    - "Mr. Shep For President"
+  reactionChannels:
+    - '557356434577162279'
+  allowedCommandChannels:
+    - '557054930586828810'
+    - '557205516968001547'
+  allowCommandsInDMs: true

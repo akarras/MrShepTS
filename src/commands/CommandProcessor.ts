@@ -3,7 +3,7 @@ import * as path from 'path'
 import * as YAML from 'yamljs'
 import { Message, TextChannel, DiscordAPIError, DMChannel } from 'discord.js';
 import { CommandBase } from './CommandBase';
-import { PingCommand } from './pingCommand';
+import { PingCommand } from './PingCommand';
 import { logError, SheepBot } from '../discord';
 import { InfoCommand } from './InfoCommand';
 import { ColorCommand } from './ColorCommand';

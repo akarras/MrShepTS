@@ -1,51 +1,60 @@
-import * as path from 'path'
-import * as YAML from 'yamljs'
 import * as debug from 'debug';
 import { IReactionHandler } from "./IReactionhandler";
 import { SheepBot } from "../discord";
-import { RichEmbed, GuildMember, User, ColorResolvable } from 'discord.js';
+import { RichEmbed, User, Message, TextChannel, MessageReaction, Role } from 'discord.js';
+import { IRoleData } from '../dataTypes/role';
 
 const roleLog = debug("bot:roles");
-
-interface IRoleData {
-  name: string;
-  messageId: string;
-  roleId: string;
-  emoji: string;
-  color: ColorResolvable;
-}
 
 export class RoleReactions implements IReactionHandler {
   private roleMap: Map<string, IRoleData>;
 
-  constructor() {
-    const roleConfig = YAML.load(path.resolve(__dirname, '../config/roles.yml'));
+  constructor(bot: SheepBot) {
+    const roleConfig = bot.roleConfig;
     this.roleMap = new Map<string, IRoleData>();
 
     const roles = [];
     for (const role of roleConfig.roles as IRoleData[]) {
-      this.roleMap.set(role.messageId, role);
+      this.roleMap.set(role.emoji, role);
       roles.push(role.name);
     }
-
     roleLog("Loaded roles: " + roles.join(', '));
   }
 
   public processReaction(reaction: import("discord.js").MessageReaction, user: User): boolean {
     let success = false;
 
-    const role = this.roleMap.get(reaction.message.id);
+    const role = this.roleMap.get(reaction.emoji.name);
     if (role !== undefined) {
-      roleLog("Successfully got user for role");
-      if (reaction.message.member.roles.has(role.roleId)) {
-        reaction.message.member.removeRole(role.roleId);
-      } else {
-        reaction.message.member.addRole(role.roleId);
-        reaction.message.channel.send(this.joinEmbed(role, user));
-      }
+      this.doWork(reaction, user, role);
       success = true;
+    } else {
+      roleLog(reaction.emoji.name);
     }
     return success;
+  }
+
+  private async doWork(reaction: MessageReaction, user: User, role: IRoleData) {
+    roleLog(`Successfully got ${role.name} for message with roleId ${role.roleId}`);
+      const member = await reaction.message.guild.fetchMember(user.id);
+      const userRole = member.roles.get(role.roleId);
+      roleLog(member.roles);
+      roleLog(userRole);
+      if (userRole !== null && userRole !== undefined) {
+        roleLog("Removing role from user " + user.username);
+        member.removeRole(role.roleId);
+        this.sendDestroyEmbed(reaction.message.channel as TextChannel, this.leaveEmbed(role, user));
+      } else {
+        roleLog("Adding role " + role.name + " " + role.roleId + " for user " + user.username);
+        member.addRole(role.roleId);
+        this.sendDestroyEmbed(reaction.message.channel as TextChannel, this.joinEmbed(role, user));
+      }
+      reaction.remove(user);
+  }
+
+  private async sendDestroyEmbed(channel: TextChannel, embed: RichEmbed) {
+    const result = await channel.send(embed) as Message;
+    result.delete(5000);
   }
 
   private joinEmbed(data: IRoleData, user: User): RichEmbed {
@@ -53,6 +62,14 @@ export class RoleReactions implements IReactionHandler {
     embed.setTitle(data.name);
     embed.setDescription(user.username + " now has role " + data.name);
     embed.setColor(0x00FF00);
+    return embed;
+  }
+
+  private leaveEmbed(data: IRoleData, user: User): RichEmbed {
+    const embed = new RichEmbed();
+    embed.setTitle(data.name);
+    embed.setDescription(user.username + " no longer has role " + data.name);
+    embed.setColor(0xFF0000);
     return embed;
   }
 

@@ -1,13 +1,14 @@
 # Map of message IDs and their corresponding roles
 roles:
   - name: 'Patch notes'
-    messageId: '557380604291842049'
-    roleId: '611974746497875999'
-    emoji: '📝'
+    description: 'Get notified with new patch notes are added'
+    messageId: '612520622349615124'
+    roleId: '557356226422243338'
+    emoji: 'PepeHappy'
     color: 0xb00b30
   - name: 'Play Sessions'
-    messageId: '557380605021782016'
-    roleId: '611975188686307338'
-    emoji: '🎮'
+    description: 'Get notified of developer sponsored play sessions'
+    messageId: '612520622349615124'
+    roleId: '557372552016691200'
+    emoji: 'pepeOK'
     color: 0xdead00
-    

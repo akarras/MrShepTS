@@ -16,16 +16,17 @@ export const logError = debug('bot:error')
 export const logWarn = debug('bot:warn')
 
 export class SheepBot {
-
   public client: Client;
   public config: any;
+  public roleConfig: any;
   public commands: CommandProcessor;
   public reactions: ReactionProcessor;
   public status: StatusUpdater;
 
   constructor() {
-    this.client = new Client()
-    this.config = YAML.load(path.resolve(__dirname, './config/settings.yml'))
+    this.client = new Client();
+    this.config = YAML.load(path.resolve(__dirname, './config/settings.yml'));
+    this.roleConfig = YAML.load(path.resolve(__dirname, './config/roles.yml'));
     this.commands = new CommandProcessor(this);
     this.reactions = new ReactionProcessor(this);
     this.status = new StatusUpdater(this);
@@ -36,18 +37,18 @@ export class SheepBot {
 
     // => Bot is ready...
     this.client.on('ready', () => {
-      logEvent(`[${this.config.settings.nameBot}] Connected.`)
-      logEvent(`Logged in as ${this.client.user.tag}`)
+      logEvent(`[${this.config.settings.nameBot}] Connected.`);
+      logEvent(`Logged in as ${this.client.user.tag}`);
     })
 
     // => Bot error and warn handler
-    this.client.on('error', logError)
-    this.client.on('warn', logWarn)
+    this.client.on('error', logError);
+    this.client.on('warn', logWarn);
 
     // => Process handler
     process.on('exit', () => {
-      logEvent(`[${this.config.settings.nameBot}] Process exit.`)
-      this.client.destroy()
+      logEvent(`[${this.config.settings.nameBot}] Process exit.`);
+      this.client.destroy();
     })
     process.on('uncaughtException', (err: Error) => {
       const errorMsg = (err ? err.stack || err : '').toString().replace(new RegExp(`${__dirname}\/`, 'g'), './')

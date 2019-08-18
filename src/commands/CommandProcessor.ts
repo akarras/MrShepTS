@@ -8,6 +8,7 @@ import { logError, SheepBot } from '../discord';
 import { InfoCommand } from './InfoCommand';
 import { ColorCommand } from './ColorCommand';
 import { HelpCommand } from './HelpCommand';
+import { ResendRolesCommands } from './ResendRolesCommand';
 
 const logCmd = debug('bot:command');
 
@@ -28,6 +29,7 @@ export class CommandProcessor {
     this.addCommand(new InfoCommand());
     this.addCommand(new ColorCommand());
     this.addCommand(new HelpCommand());
+    this.addCommand(new ResendRolesCommands(bot));
 
     this.bot.client.on('message', (message: Message) => {
       this.sendCommand(message);

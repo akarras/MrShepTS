@@ -69,7 +69,7 @@
 
 // SERVER
 // ----------------------------------------------------------------------------
-	gulp.task('serve', ['debug', 'watch'], function() {
+	gulp.task('serve', ['debug', 'build', 'watch'], function() {
 		return gulpNodemon({
 			script: './build/index.js',
 			watch: './build/'

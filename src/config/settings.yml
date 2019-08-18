@@ -3,6 +3,7 @@ settings:
   prefix: '!test'
   nameBot: 'Mr Sheep'
   activitySwapTimeMs: 360000
+  rolesChannel: '612517327719759873'
   activities: 
     - 'Being in beta is hard'
     - 'Play Stir Party!'
@@ -17,7 +18,7 @@ settings:
     - "Steam 2020"
     - "Mr. Shep For President"
   reactionChannels:
-    - '557356434577162279'
+    - '612517327719759873'
   allowedCommandChannels:
     - '557054930586828810'
     - '557205516968001547'

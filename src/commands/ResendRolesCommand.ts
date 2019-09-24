@@ -42,8 +42,6 @@ export class ResendRolesCommands extends CommandBase {
       rolesEmbed.setTitle("Role Notifications");
       rolesEmbed.setDescription("Self opt into different roles");
       roleLog("Data", this.bot.data);
-      
-      console.log(this.bot.data);
       const roles = this.bot.data.roles;
       const emojis = [] as Emoji[];
       for (const role of roles) {

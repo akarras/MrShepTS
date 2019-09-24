@@ -38,9 +38,9 @@ export class CommandProcessor {
 
   private async sendCommand(message: Message) {
     if (message.author.id !== this.bot.client.user.id) {
-      const prefixLength = this.bot.config.settings.prefix.length;
+      const prefixLength = this.bot.data.config.settings.prefix.length;
       const compValue = message.cleanContent.slice(0, prefixLength);
-      if (compValue === this.bot.config.settings.prefix) {
+      if (compValue === this.bot.data.config.settings.prefix) {
         if (await this.canUserSend(message) && await this.isAllowedChannel(message)) {
           this.processMessage(message);
         }
@@ -55,8 +55,8 @@ export class CommandProcessor {
 
   private async isAllowedChannel(message: Message): Promise<boolean> {
     let allowed = false;
-    const commandChannels = this.bot.config.settings.allowedCommandChannels as string[];
-    const allowedInDMs = this.bot.config.settings.allowCommandsInDMs as boolean;
+    const commandChannels = this.bot.data.config.settings.allowedCommandChannels as string[];
+    const allowedInDMs = this.bot.data.config.settings.allowCommandsInDMs as boolean;
     logCmd(message.channel.type);
     if (allowedInDMs && message.channel.type === "dm") {
       allowed = true;
@@ -76,7 +76,7 @@ export class CommandProcessor {
   }
 
   private async processMessage(message: Message) {
-    const prefixLength = this.bot.config.settings.prefix.length;
+    const prefixLength = this.bot.data.config.settings.prefix.length;
     let messageContent = message.cleanContent.slice(prefixLength);
     messageContent = messageContent.trim();
     logCmd(messageContent);

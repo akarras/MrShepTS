@@ -4,17 +4,16 @@ import { SheepBot } from "../discord";
 import { RichEmbed, User, Message, TextChannel, MessageReaction, Role } from 'discord.js';
 import { IRoleData } from '../dataTypes/role';
 
-const roleLog = debug("bot:roles");
+const roleLog = debug('bot:sheepData');
 
 export class RoleReactions implements IReactionHandler {
   private roleMap: Map<string, IRoleData>;
 
   constructor(bot: SheepBot) {
-    const roleConfig = bot.roleConfig;
     this.roleMap = new Map<string, IRoleData>();
 
     const roles = [];
-    for (const role of roleConfig.roles as IRoleData[]) {
+    for (const role of bot.data.roles) {
       this.roleMap.set(role.emoji, role);
       roles.push(role.name);
     }

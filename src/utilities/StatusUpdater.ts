@@ -13,15 +13,15 @@ export class StatusUpdater {
       if (this.timer === undefined) {
         this.timer = setInterval(() => {
           this.setStatus(this.getRandomActivity());
-        }, bot.config.settings.activitySwapTimeMs);
+        }, bot.data.config.settings.activitySwapTimeMs as number);
       }
     });
   }
 
   private getRandomActivity(): string {
-    if (this.bot.config.settings.activities.length !== undefined) {
-      const randSelection = Math.floor(Math.random() * this.bot.config.settings.activities.length);
-      return this.bot.config.settings.activities[randSelection];
+    if (this.bot.data.config.settings.activities.length !== undefined) {
+      const randSelection = Math.floor(Math.random() * this.bot.data.config.settings.activities.length);
+      return this.bot.data.config.settings.activities[randSelection];
     } else {
       return "Couldn't get activities";
     }

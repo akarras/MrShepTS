@@ -38,7 +38,7 @@ export class ReactionProcessor {
 
   // Fetches messages for channels we want to react against
   private async subscribeToReactions() {
-    const channels = this.bot.config.settings.reactionChannels;
+    const channels = this.bot.data.config.settings.reactionChannels;
     for (const channel of channels) {
       const discordChannel = this.bot.client.channels.get(channel) as TextChannel;
       if (discordChannel !== undefined) {

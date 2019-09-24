@@ -2,13 +2,19 @@
 roles:
   - name: 'Patch notes'
     description: 'Get notified with new patch notes are added'
-    messageId: '612520622349615124'
+    messageId: '625856682723115019'
     roleId: '557356226422243338'
     emoji: 'PepeHappy'
     color: 0xb00b30
   - name: 'Play Sessions'
     description: 'Get notified of developer sponsored play sessions'
-    messageId: '612520622349615124'
+    messageId: '625856682723115019'
     roleId: '557372552016691200'
     emoji: 'pepeOK'
+    color: 0xdead00
+  - name: 'Streams'
+    description: 'Get notified when Chew starts streaming Stir Party development/play'
+    messageId: '625856682723115019'
+    roleId: '625857372040200202'
+    emoji: 'monkaS'
     color: 0xdead00

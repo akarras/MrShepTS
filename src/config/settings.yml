@@ -1,5 +1,5 @@
 settings:
-  token: 'NTU3MjAwOTE1MzA0ODA4NDU5.D3E96w.wZus9HFlknZQ64sNriXpOtrZULo'
+  token: '' # Provide token here
   prefix: '!sp'
   nameBot: 'Mr Sheep'
   activitySwapTimeMs: 360000
